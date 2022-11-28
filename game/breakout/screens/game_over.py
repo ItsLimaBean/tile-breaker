@@ -13,13 +13,20 @@ class GameOverScreen(BaseScreen):
         self.button2 = TextBox(
             (200, 100), "Quit", color=(0, 255, 0), bgcolor=(255, 140, 70)
         )
+        self.button3 = TextBox(
+            (200, 100), "Upload Score", color=(0, 255, 0), bgcolor=(255, 140, 70)
+        )
         self.button1.rect.topleft = (200, 400)
         self.button2.rect.topleft = (500, 400)
-        self.sprites.add(self.button1, self.button2)
+        self.button3.rect.topleft = (300, 550)
+        self.sprites.add(self.button1, self.button2, self.button3)
 
     def draw(self):
         self.window.fill((255, 255, 255))
         self.sprites.draw(self.window)
+
+    def update(self):
+        pass
 
     def manage_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -29,3 +36,6 @@ class GameOverScreen(BaseScreen):
             elif self.button2.rect.collidepoint(event.pos):
                 self.running = False
                 self.next_screen = False
+            elif self.button3.rect.collidepoint(event.pos):
+                self.running = False
+                self.next_screen = "upload_score"

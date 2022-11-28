@@ -1,5 +1,5 @@
 import pygame
-from breakout.screens import WelcomeScreen, GameOverScreen, GameScreen
+from breakout.screens import WelcomeScreen, GameOverScreen, GameScreen, UploadScoreScreen
 
 
 class Game:
@@ -17,6 +17,7 @@ class Game:
             "welcome": WelcomeScreen,
             "game": GameScreen,
             "game_over": GameOverScreen,
+            "upload_score": UploadScoreScreen
         }
 
         # Start the loop
