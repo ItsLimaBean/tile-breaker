@@ -20,6 +20,12 @@ class Database:
 
         self.save()
 
+    def get_score(self, username):
+        if username is None:
+            return self.scores
+        else:
+            return { username: self.scores[username] }
+
     def save(self):
         content = json.dumps(self.scores, indent=4)
         with open(self.filename, "w") as file:
