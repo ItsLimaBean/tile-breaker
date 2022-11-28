@@ -6,8 +6,8 @@ db = Database("database.json")
 
 @app.route("/api/add_score", methods=["POST"])
 def home():
-    username = request.form.get("username")
-    score = request.form.get("score")
+    username = request.json["username"]
+    score = request.json["score"]
     db.add_score(username, score)
     return make_response("ok")
 
