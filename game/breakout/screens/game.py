@@ -10,6 +10,9 @@ class GameScreen(BaseScreen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        self.score = 0
+        self.streak = 1
+
         # Create the paddle
         self.paddle = Paddle(200, 30, (0, 255, 0), limits=self.rect)
 
@@ -37,12 +40,18 @@ class GameScreen(BaseScreen):
 
         self.sprites.update()
         collided = self.ball.collidetiles(self.tiles)
-
+        if collided:
+            self.score += self.streak
+            self.streak += 1
+        
         caught_the_ball = self.ball.collidepaddle(self.paddle.rect)
+        if caught_the_ball:
+            self.streak = 1
 
         if self.ball.rect.bottom > self.paddle.rect.top and not caught_the_ball:
             self.running = False
             self.next_screen = "game_over"
+            self.store.score = self.score
 
     def draw(self):
         self.window.fill((255, 255, 255))

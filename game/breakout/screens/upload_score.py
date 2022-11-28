@@ -15,7 +15,7 @@ class UploadScoreScreen(BaseScreen):
             (200, 50), "Enter Username:", color=(0, 0, 0), bgcolor=(255, 255, 255)
         )
         self.name_input = InputBox(
-            (300, 100), "", color=(255, 255, 255), bgcolor=(0, 0, 0)
+            (300, 100), self.store.last_username, color=(255, 255, 255), bgcolor=(0, 0, 0)
         )
 
         self.upload_button = TextBox(
@@ -50,7 +50,8 @@ class UploadScoreScreen(BaseScreen):
                 self.activeinput = self.name_input
                 self.activeinput.set_active(True)
             elif self.upload_button.rect.collidepoint(event.pos) and self.name_input.text != "":
-                requests.post("http://127.0.0.1:5000/api/add_score", json={ "username": self.name_input.text, "score": "123" })
+                self.store.last_username = self.name_input.text
+                requests.post("http://127.0.0.1:5000/api/add_score", json={ "username": self.store.last_username, "score": self.store.score })
                 self.running = False
                 self.next_screen = "welcome"
                 

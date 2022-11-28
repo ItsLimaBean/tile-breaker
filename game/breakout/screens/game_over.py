@@ -7,6 +7,9 @@ class GameOverScreen(BaseScreen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.sprites = pygame.sprite.Group()
+        self.score = TextBox(
+            (200, 100), "Score: " + str(self.store.score), color=(0, 0, 0), bgcolor=(255, 255, 255)
+        )
         self.button1 = TextBox(
             (200, 100), "Again", color=(255, 0, 0), bgcolor=(120, 120, 120)
         )
@@ -19,7 +22,8 @@ class GameOverScreen(BaseScreen):
         self.button1.rect.topleft = (200, 400)
         self.button2.rect.topleft = (500, 400)
         self.button3.rect.topleft = (300, 550)
-        self.sprites.add(self.button1, self.button2, self.button3)
+        self.score.rect.topleft = (300, 200)
+        self.sprites.add(self.button1, self.button2, self.button3, self.score)
 
     def draw(self):
         self.window.fill((255, 255, 255))

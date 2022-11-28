@@ -1,5 +1,6 @@
 import pygame
 from breakout.screens import WelcomeScreen, GameOverScreen, GameScreen, UploadScoreScreen
+from components.store import GameStore
 
 
 class Game:
@@ -8,6 +9,7 @@ class Game:
     def __init__(self):
         # Creates the window
         self.window = pygame.display.set_mode((800, 800))
+        self.store = GameStore()
 
     def run(self):
         """Main method, manages interaction between screens"""
@@ -30,7 +32,7 @@ class Game:
                 raise RuntimeError(f"Screen {current_screen} not found!")
 
             # Create a new screen object, "connected" to the window
-            screen = screen_class(self.window)
+            screen = screen_class(self.window, self.store)
 
             # Run the screen
             screen.run()
